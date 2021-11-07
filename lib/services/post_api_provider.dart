@@ -1,7 +1,5 @@
 import 'dart:convert';
-
 import 'package:real_homes/models/post.dart';
-
 import 'package:http/http.dart' as http;
 
 

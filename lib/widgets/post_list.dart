@@ -1,24 +1,21 @@
-import 'package:real_homes/bloc/user_bloc.dart';
-import 'package:real_homes/bloc/user_state.dart';
+import 'package:real_homes/bloc/post_bloc.dart';
+import 'package:real_homes/bloc/post_event.dart';
+import 'package:real_homes/bloc/post_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PostList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final PostBloc postBloc = BlocProvider.of<PostBloc>(context);
     return BlocBuilder<PostBloc, PostState>(
       builder: (context, state) {
         if (state is PostEmptyState) {
-          return Center(
-            child: Text(
-              'No data received. Press button "Load"',
-              style: TextStyle(fontSize: 20.0),
-            ),
-          );
+          postBloc.add(PostLoadEvent());
         }
 
         if (state is PostLoadingState) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
 
         if (state is PostLoadedState) {
@@ -27,25 +24,16 @@ class PostList extends StatelessWidget {
             itemBuilder: (context, index) => Container(
               color: index % 2 == 0 ? Colors.white : Colors.blue[50],
               child: ListTile(
-                leading: Text(
-                  'ID: ${state.loadedPost[index].id}',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
+                leading: Image.network(state.loadedPost[index].attachement),
                 title: Column(
                   children: <Widget>[
                     Text(
                       '${state.loadedPost[index].title}',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          'Email: ${state.loadedPost[index].content}',
-                          style: TextStyle(fontStyle: FontStyle.italic),
-                        ),
-                        Image.network(state.loadedPost[index].attachement),
-                      ],
+                    Text(
+                      state.loadedPost[index].content.substring(1,100) + '...',
+                      style: const TextStyle(fontStyle: FontStyle.italic),
                     ),
                   ],
                 ),
@@ -55,14 +43,15 @@ class PostList extends StatelessWidget {
         }
 
         if (state is PostErrorState) {
-          return Center(
+          return const Center(
             child: Text(
-              'Error fetching users',
+              'Error fetching posts',
               style: TextStyle(fontSize: 20.0),
             ),
           );
         }
-        return Text('');
+
+        return const Text('Posts not found');
       },
     );
   }

@@ -1,13 +1,12 @@
-import 'package:real_homes/bloc/user_event.dart';
-import 'package:real_homes/bloc/user_state.dart';
+import 'package:real_homes/bloc/post_event.dart';
+import 'package:real_homes/bloc/post_state.dart';
 import 'package:real_homes/models/post.dart';
-import 'package:real_homes/services/user_repository.dart';
+import 'package:real_homes/services/post_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 
 class PostBloc extends Bloc<PostEvent, PostState> {
   final PostsRepository postsRepository;
-
 
   PostBloc({required this.postsRepository}) : super(PostEmptyState());
 
