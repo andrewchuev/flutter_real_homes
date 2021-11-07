@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'pages/home_page.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const RealHomes());
 }
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class RealHomes extends StatelessWidget {
+  const RealHomes({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

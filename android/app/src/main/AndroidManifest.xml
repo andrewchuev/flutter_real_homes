@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="pro.reslab.real_homes">
-   <application
-        android:label="real_homes"
+    <uses-permission android:name="android.permission.INTERNET" />
+    <application
+        android:label="RealHomes"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

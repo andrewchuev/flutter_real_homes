@@ -25,17 +25,24 @@ class PostList extends StatelessWidget {
               color: index % 2 == 0 ? Colors.white : Colors.blue[50],
               child: ListTile(
                 leading: Image.network(state.loadedPost[index].attachement),
-                title: Column(
-                  children: <Widget>[
-                    Text(
-                      '${state.loadedPost[index].title}',
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      state.loadedPost[index].content.substring(1,100) + '...',
-                      style: const TextStyle(fontStyle: FontStyle.italic),
-                    ),
-                  ],
+                title: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: <Widget>[
+                      Text(
+                        '${state.loadedPost[index].title}',
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        state.loadedPost[index].content.substring(0, 75) + '...',
+                        style: const TextStyle(fontStyle: FontStyle.italic),
+                      ),
+                    ],
+                  ),
+                ),
+                subtitle: Text(
+                  state.loadedPost[index].price,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
             ),
