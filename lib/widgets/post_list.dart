@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PostList extends StatelessWidget {
+  const PostList({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final PostBloc postBloc = BlocProvider.of<PostBloc>(context);
@@ -21,29 +23,24 @@ class PostList extends StatelessWidget {
         if (state is PostLoadedState) {
           return ListView.builder(
             itemCount: state.loadedPost.length,
-            itemBuilder: (context, index) => Container(
-              color: index % 2 == 0 ? Colors.white : Colors.blue[50],
-              child: ListTile(
-                leading: Image.network(state.loadedPost[index].attachement),
-                title: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: <Widget>[
-                      Text(
-                        '${state.loadedPost[index].title}',
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        state.loadedPost[index].content.substring(0, 75) + '...',
-                        style: const TextStyle(fontStyle: FontStyle.italic),
-                      ),
-                    ],
-                  ),
-                ),
-                subtitle: Text(
-                  state.loadedPost[index].price,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
+            itemBuilder: (context, index) => ListTile(
+              contentPadding: EdgeInsets.all(5),
+              leading: Stack(children: [
+                Image.network(
+                  state.loadedPost[index].attachement,
+                  width: 100,
+                  height: 100,
+                  fit: BoxFit.cover,
+                )
+              ]),
+              title: Text(
+                state.loadedPost[index].title,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+              subtitle: Text(
+                state.loadedPost[index].content,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
               ),
             ),
           );

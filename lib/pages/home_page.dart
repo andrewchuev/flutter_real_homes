@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          title: const Text('Posts List'),
+          title: const Text('Apartments'),
           centerTitle: true,
         ),
         body: Column(
