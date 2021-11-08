@@ -23,24 +23,38 @@ class PostList extends StatelessWidget {
         if (state is PostLoadedState) {
           return ListView.builder(
             itemCount: state.loadedPost.length,
-            itemBuilder: (context, index) => ListTile(
-              contentPadding: EdgeInsets.all(5),
-              leading: Stack(children: [
-                Image.network(
-                  state.loadedPost[index].attachement,
-                  width: 100,
-                  height: 100,
-                  fit: BoxFit.cover,
-                )
-              ]),
-              title: Text(
-                state.loadedPost[index].title,
-                style: const TextStyle(fontWeight: FontWeight.bold),
-              ),
-              subtitle: Text(
-                state.loadedPost[index].content,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
+            itemBuilder: (context, index) => Card(
+              margin: const EdgeInsets.all(5),
+              child: Row(
+                children: [
+                  Image.network(
+                    state.loadedPost[index].attachement,
+                    width: 100,
+                    height: 100,
+                  ),
+                  Expanded(
+                    child: Column(
+                      children: [
+                        Text(
+                          state.loadedPost[index].title,
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            state.loadedPost[index].content,
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        Text(
+                          state.loadedPost[index].price,
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
               ),
             ),
           );

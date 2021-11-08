@@ -11,7 +11,7 @@ class PostProvider {
       final List<dynamic> postJson = json.decode(response.body);
       return postJson.map((json) => Post.fromJson(json)).toList();
     } else {
-      throw Exception('Error fetching users');
+      throw Exception('Error fetching posts');
     }
   }
 }
