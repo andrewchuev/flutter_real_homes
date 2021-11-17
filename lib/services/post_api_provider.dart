@@ -5,7 +5,8 @@ import 'package:http/http.dart' as http;
 
 class PostProvider {
   Future<List<Post>> getPosts() async {
-    final response = await http.get(Uri.parse('https://realhomes.reslab.pro/wp-json/reslab/v1/properties'));
+    const uri = 'https://realhomes.reslab.pro/wp-json/reslab/v1/properties';
+    final response = await http.get(Uri.parse(uri));
 
     if (response.statusCode == 200) {
       final List<dynamic> postJson = json.decode(response.body);
